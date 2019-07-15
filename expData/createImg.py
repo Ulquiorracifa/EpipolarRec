@@ -41,7 +41,8 @@ def FuncGaussMix(filepath, func, funcSum):
 
 def getAffine():
     pts1 = np.float32([[50, 50], [50, 550], [550, 50], [550, 550]])
-    pts2 = np.float32([[100, 100], [50, 300], [300, 50], [550, 550]])
+    pts2 = np.float32([[200, 50], [50, 550], [400, 50], [550, 550]])
+    # pts2 = np.float32([[100, 100], [50, 300], [300, 50], [550, 550]])
 
     M = cv2.getPerspectiveTransform(pts1, pts2)
 
@@ -54,6 +55,7 @@ if __name__ == '__main__':
     img = cv2.imread("originFile.png")
     rows, cols, ch = img.shape
     dst = cv2.warpPerspective(img, getAffine(), (cols, rows))
+    cv2.imwrite('dst.jpg', dst)
     plt.subplot(121), plt.imshow(img)
     plt.subplot(122), plt.imshow(dst)
     plt.show()
